@@ -5,8 +5,6 @@ import com.duyle.rentacar.demoapplication.service.StudentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
-
 @RestController
 public class MainController {
     private StudentService studentService;
