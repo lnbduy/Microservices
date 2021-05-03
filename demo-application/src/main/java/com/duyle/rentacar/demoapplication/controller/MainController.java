@@ -2,10 +2,10 @@ package com.duyle.rentacar.demoapplication.controller;
 
 import com.duyle.rentacar.demoapplication.model.Student;
 import com.duyle.rentacar.demoapplication.service.StudentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.websocket.server.PathParam;
 
 @RestController
 public class MainController {
@@ -23,5 +23,15 @@ public class MainController {
     @PostMapping(value = "/students")
     public Student save(@RequestBody Student student) {
         return studentService.save(student);
+    }
+
+    @GetMapping(value = "/students/{id}")
+    public ResponseEntity<Student> fetchStudentById(@PathVariable int id) {
+        Student student = studentService.fetchStudentById(id);
+        if (student == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok().body(student);
+        }
     }
 }

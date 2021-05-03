@@ -16,4 +16,9 @@ public class StudentServiceImpl implements StudentService {
     public Student save(Student student) {
         return repository.save(student);
     }
+
+    @Override
+    public Student fetchStudentById(int id) {
+        return repository.findById(id).orElse(null);
+    }
 }
