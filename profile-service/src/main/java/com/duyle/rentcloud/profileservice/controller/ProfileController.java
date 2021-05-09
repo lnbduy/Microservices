@@ -2,12 +2,12 @@ package com.duyle.rentcloud.profileservice.controller;
 
 import com.duyle.rentcloud.commons.model.Customer;
 import com.duyle.rentcloud.profileservice.service.CustomerService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping(name = "/services")
+@RequestMapping(value = "/services")
 public class ProfileController {
     private final CustomerService customerService;
 
@@ -15,7 +15,18 @@ public class ProfileController {
         this.customerService = customerService;
     }
 
+    @RequestMapping(value = "/profile", method = RequestMethod.POST)
     public Customer save(@RequestBody Customer customer) {
         return customerService.save(customer);
+    }
+
+    @GetMapping(value = "/profile")
+    public Customer fetch(@RequestParam int profileId) {
+        return customerService.fetchById(profileId);
+    }
+
+    @GetMapping(value = "/profiles")
+    public List<Customer> fetch() {
+        return customerService.fetchAllProfiles();
     }
 }
