@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: profile
+  profiles:
+    active: prod
+  config:
+    import: optional:configserver:http://localhost:8191
+  jpa:
+    hibernate:
+      ddl-auto: update
